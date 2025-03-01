@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_pymongo import PyMongo
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
@@ -43,10 +43,10 @@ def register():
         username = request.form['username']
         password = request.form['password']
         if mongo.db.users.find_one({"username": username}):
-            flash("Username already exists!")
+            flash("نام کاربری قبلاً ثبت شده!")
         else:
             mongo.db.users.insert_one({"username": username, "password": password})
-            flash("Registration successful!")
+            flash("ثبت‌نام با موفقیت انجام شد!")
             return redirect(url_for("login"))
     return render_template('register.html')
 
@@ -59,7 +59,7 @@ def login():
         if user:
             login_user(User(username, password))
             return redirect(url_for("dashboard"))
-        flash("Invalid credentials!")
+        flash("نام کاربری یا رمز عبور اشتباه است!")
     return render_template('login.html')
 
 @app.route('/logout')
@@ -96,18 +96,6 @@ def upload_music():
 def list_musics():
     musics = list(mongo.db.musics.find())
     return render_template('musics.html', musics=musics)
-
-@app.route('/blog', methods=['GET', 'POST'])
-def blog():
-    if request.method == 'POST':
-        mongo.db.blog_posts.insert_one({
-            "title": request.form['title'],
-            "content": request.form['content'],
-            "author": request.form['author'],
-            "created_at": datetime.utcnow()
-        })
-    posts = list(mongo.db.blog_posts.find())
-    return render_template('blog.html', posts=posts)
 
 if __name__ == '__main__':
     app.run(debug=True)
