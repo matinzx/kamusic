@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-4xl font-bold text-gray-700 text-center mb-6">📤 آپلود موزیک</h2>
+<form action="{{ url_for('upload_music') }}" method="post" enctype="multipart/form-data" class="bg-white/20 backdrop-blur-lg p-8 rounded-3xl shadow-xl mx-auto w-2/3">
+    <input type="text" name="title" placeholder="🎵 عنوان موزیک" class="w-full border p-3 rounded-lg mb-3">
+    <input type="text" name="artist" placeholder="🎤 نام خواننده" class="w-full border p-3 rounded-lg mb-3">
+    <input type="text" name="genre" placeholder="🎼 سبک" class="w-full border p-3 rounded-lg mb-3">
+    <input type="file" name="file" class="w-full border p-3 rounded-lg mb-3">
+    <button type="submit" class="w-full bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 shadow-lg transition">📂 آپلود موزیک</button>
+</form>
+{% endblock %}

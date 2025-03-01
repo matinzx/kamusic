@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1 class="text-3xl font-bold">Welcome to Kamusic 🎶</h1>
+<div class="text-center">
+    <h2 class="text-4xl font-bold text-gray-800">🎶 خوش آمدید به Kamusic</h2>
+    <p class="text-gray-600 mt-2">بهترین مکان برای اشتراک‌گذاری و گوش دادن به موزیک‌های جدید!</p>
+    <a href="{{ url_for('list_musics') }}" class="mt-4 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+        🎧 مشاهده موزیک‌ها
+    </a>
+</div>
 {% endblock %}
